@@ -9,7 +9,7 @@ module forlab_linalg
     private
 
     public :: is_square, is_symmetric
-    public :: zeros, ones, linspace, logspace, seq
+    public :: zeros, ones, ex, linspace, logspace, seq
     public :: eye
     public :: horzcat, vertcat
     public :: diag, det, lu, matpow, qr, svd, trace, tril, triu, chol, norm, &
@@ -184,6 +184,130 @@ module forlab_linalg
             integer, intent(in), optional :: itermax
         end subroutine eig_qp
     end interface eig
+
+    !> Make a `ex` vector/matrix. 
+    interface ex
+        !> Make a ex vector of `real(sp)` type.
+        pure module function ex_1_r_sp(value, dim) result(result)
+            real(sp), intent(in) :: value
+            integer, intent(in) :: dim
+            real(sp) :: result(dim)
+        end function ex_1_r_sp
+        !> Make a ex matrix of `real(sp)` type.
+        pure module function ex_2_r_sp(value, dim1, dim2) result(result)
+            real(sp), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            real(sp) :: result(dim1, dim2)
+        end function ex_2_r_sp
+        !> Make a ex vector of `real(dp)` type.
+        pure module function ex_1_r_dp(value, dim) result(result)
+            real(dp), intent(in) :: value
+            integer, intent(in) :: dim
+            real(dp) :: result(dim)
+        end function ex_1_r_dp
+        !> Make a ex matrix of `real(dp)` type.
+        pure module function ex_2_r_dp(value, dim1, dim2) result(result)
+            real(dp), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            real(dp) :: result(dim1, dim2)
+        end function ex_2_r_dp
+        !> Make a ex vector of `real(qp)` type.
+        pure module function ex_1_r_qp(value, dim) result(result)
+            real(qp), intent(in) :: value
+            integer, intent(in) :: dim
+            real(qp) :: result(dim)
+        end function ex_1_r_qp
+        !> Make a ex matrix of `real(qp)` type.
+        pure module function ex_2_r_qp(value, dim1, dim2) result(result)
+            real(qp), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            real(qp) :: result(dim1, dim2)
+        end function ex_2_r_qp
+        !> Make a ex vector of `integer(int8)` type.
+        pure module function ex_1_i_int8(value, dim) result(result)
+            integer(int8), intent(in) :: value
+            integer, intent(in) :: dim
+            integer(int8) :: result(dim)
+        end function ex_1_i_int8
+        !> Make a ex matrix of `integer(int8)` type.
+        pure module function ex_2_i_int8(value, dim1, dim2) result(result)
+            integer(int8), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            integer(int8) :: result(dim1, dim2)
+        end function ex_2_i_int8
+        !> Make a ex vector of `integer(int16)` type.
+        pure module function ex_1_i_int16(value, dim) result(result)
+            integer(int16), intent(in) :: value
+            integer, intent(in) :: dim
+            integer(int16) :: result(dim)
+        end function ex_1_i_int16
+        !> Make a ex matrix of `integer(int16)` type.
+        pure module function ex_2_i_int16(value, dim1, dim2) result(result)
+            integer(int16), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            integer(int16) :: result(dim1, dim2)
+        end function ex_2_i_int16
+        !> Make a ex vector of `integer(int32)` type.
+        pure module function ex_1_i_int32(value, dim) result(result)
+            integer(int32), intent(in) :: value
+            integer, intent(in) :: dim
+            integer(int32) :: result(dim)
+        end function ex_1_i_int32
+        !> Make a ex matrix of `integer(int32)` type.
+        pure module function ex_2_i_int32(value, dim1, dim2) result(result)
+            integer(int32), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            integer(int32) :: result(dim1, dim2)
+        end function ex_2_i_int32
+        !> Make a ex vector of `integer(int64)` type.
+        pure module function ex_1_i_int64(value, dim) result(result)
+            integer(int64), intent(in) :: value
+            integer, intent(in) :: dim
+            integer(int64) :: result(dim)
+        end function ex_1_i_int64
+        !> Make a ex matrix of `integer(int64)` type.
+        pure module function ex_2_i_int64(value, dim1, dim2) result(result)
+            integer(int64), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            integer(int64) :: result(dim1, dim2)
+        end function ex_2_i_int64
+        !> Make a ex vector of `complex(sp)` type.
+        pure module function ex_1_c_sp(value, dim) result(result)
+            complex(sp), intent(in) :: value
+            integer, intent(in) :: dim
+            complex(sp) :: result(dim)
+        end function ex_1_c_sp
+        !> Make a ex matrix of `complex(sp)` type.
+        pure module function ex_2_c_sp(value, dim1, dim2) result(result)
+            complex(sp), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            complex(sp) :: result(dim1, dim2)
+        end function ex_2_c_sp
+        !> Make a ex vector of `complex(dp)` type.
+        pure module function ex_1_c_dp(value, dim) result(result)
+            complex(dp), intent(in) :: value
+            integer, intent(in) :: dim
+            complex(dp) :: result(dim)
+        end function ex_1_c_dp
+        !> Make a ex matrix of `complex(dp)` type.
+        pure module function ex_2_c_dp(value, dim1, dim2) result(result)
+            complex(dp), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            complex(dp) :: result(dim1, dim2)
+        end function ex_2_c_dp
+        !> Make a ex vector of `complex(qp)` type.
+        pure module function ex_1_c_qp(value, dim) result(result)
+            complex(qp), intent(in) :: value
+            integer, intent(in) :: dim
+            complex(qp) :: result(dim)
+        end function ex_1_c_qp
+        !> Make a ex matrix of `complex(qp)` type.
+        pure module function ex_2_c_qp(value, dim1, dim2) result(result)
+            complex(qp), intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            complex(qp) :: result(dim1, dim2)
+        end function ex_2_c_qp
+    end interface ex
 
     interface eye
         module subroutine eye_sp(X)
@@ -813,42 +937,35 @@ module forlab_linalg
     end interface qr
 
     interface seq
-        !! seq returns evenly spaced vector.
-        module subroutine seq_sp (X, from, to, by)
-            real(sp), dimension(:), allocatable, intent(out) :: X
-            real(sp), intent(in) :: from, to
-            real(sp), optional, intent(in) :: by
-        end subroutine seq_sp
-        module subroutine seq_dp (X, from, to, by)
-            real(dp), dimension(:), allocatable, intent(out) :: X
-            real(dp), intent(in) :: from, to
-            real(dp), optional, intent(in) :: by
-        end subroutine seq_dp
-        module subroutine seq_qp (X, from, to, by)
-            real(qp), dimension(:), allocatable, intent(out) :: X
-            real(qp), intent(in) :: from, to
-            real(qp), optional, intent(in) :: by
-        end subroutine seq_qp
-        module subroutine seq_int8 (X, from, to, by)
-            integer(int8), dimension(:), allocatable, intent(out) :: X
-            integer(int8), intent(in) :: from, to
-            integer(int8), optional, intent(in) :: by
-        end subroutine seq_int8
-        module subroutine seq_int16 (X, from, to, by)
-            integer(int16), dimension(:), allocatable, intent(out) :: X
-            integer(int16), intent(in) :: from, to
-            integer(int16), optional, intent(in) :: by
-        end subroutine seq_int16
-        module subroutine seq_int32 (X, from, to, by)
-            integer(int32), dimension(:), allocatable, intent(out) :: X
-            integer(int32), intent(in) :: from, to
-            integer(int32), optional, intent(in) :: by
-        end subroutine seq_int32
-        module subroutine seq_int64 (X, from, to, by)
-            integer(int64), dimension(:), allocatable, intent(out) :: X
-            integer(int64), intent(in) :: from, to
-            integer(int64), optional, intent(in) :: by
-        end subroutine seq_int64
+        !> seq returns evenly spaced vector.
+        pure module function seq_r_sp (start, end, by) result(result)
+            real(sp), intent(in) :: start, end, by
+            real(sp) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_r_sp
+        pure module function seq_r_dp (start, end, by) result(result)
+            real(dp), intent(in) :: start, end, by
+            real(dp) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_r_dp
+        pure module function seq_r_qp (start, end, by) result(result)
+            real(qp), intent(in) :: start, end, by
+            real(qp) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_r_qp
+        pure module function seq_i_int8 (start, end, by) result(result)
+            integer(int8), intent(in) :: start, end, by
+            integer(int8) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_i_int8
+        pure module function seq_i_int16 (start, end, by) result(result)
+            integer(int16), intent(in) :: start, end, by
+            integer(int16) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_i_int16
+        pure module function seq_i_int32 (start, end, by) result(result)
+            integer(int32), intent(in) :: start, end, by
+            integer(int32) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_i_int32
+        pure module function seq_i_int64 (start, end, by) result(result)
+            integer(int64), intent(in) :: start, end, by
+            integer(int64) :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_i_int64
     end interface seq
 
     interface solve

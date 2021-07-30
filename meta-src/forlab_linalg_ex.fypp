@@ -1,0 +1,35 @@
+#:include "common.fypp"
+#:set RCI_KINDS_TYPES = REAL_KINDS_TYPES + INT_KINDS_TYPES + CMPLX_KINDS_TYPES 
+submodule (forlab_linalg) forlab_linalg_ex
+    
+    implicit none
+    
+contains
+
+    #:for k1, t1 in RCI_KINDS_TYPES
+    !> Make a ex vector of `${t1}$` type.
+    pure function ex_1_${t1[0]}$_${k1}$(value, dim) result(result)
+        
+        implicit none
+        ${t1}$, intent(in) :: value
+        integer, intent(in) :: dim
+        ${t1}$ :: result(dim)
+
+        result = value
+        
+    end function ex_1_${t1[0]}$_${k1}$
+
+    !> Make a ex matrix of `${t1}$` type.
+    pure function ex_2_${t1[0]}$_${k1}$(value, dim1, dim2) result(result)
+        
+        implicit none
+        ${t1}$, intent(in) :: value
+        integer, intent(in) :: dim1, dim2
+        ${t1}$ :: result(dim1, dim2)
+
+        result = value
+        
+    end function ex_2_${t1[0]}$_${k1}$
+    #:endfor
+
+end submodule forlab_linalg_ex

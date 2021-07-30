@@ -47,6 +47,10 @@ name = "linalg_diff"
 source-dir = "test/linalg"
 main = "test_linalg_diff.f90"
 [[test]]
+name = "linalg_ex"
+source-dir = "test/linalg"
+main = "test_linalg_ex.f90"
+[[test]]
 name = "linalg_i"
 source-dir = "test/linalg"
 main = "test_linalg_i.f90"
@@ -54,6 +58,10 @@ main = "test_linalg_i.f90"
 name = "linalg_linspace"
 source-dir = "test/linalg"
 main = "test_linalg_linspace.f90"
+[[test]]
+name = "linalg_seq"
+source-dir = "test/linalg"
+main = "test_linalg_seq.f90"
 [[test]]
 name = "linalg_tri"
 source-dir = "test/linalg"

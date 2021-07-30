@@ -29,11 +29,11 @@ module forlab_io
         procedure :: close
     end type file
 
+    !> version: experimental
+    !>
+    !> Quickly display strings, scalars and low-dimensional arrays to the default output_unit
+    !> ([Specification](../page/specs/stdlib_io.html))
     interface disp
-        !! version: experimental
-        !!
-        !! Quickly display strings, scalars and low-dimensional arrays to the default output_unit
-        !! ([Specification](../page/specs/stdlib_io.html#description))
         #:set DISP_KINDS_TYPES = REAL_KINDS_TYPES + INT_KINDS_TYPES &
             & + CMPLX_KINDS_TYPES + LOG_KINDS_TYPES
         #:set DISP_RANKS = range(0, 4)

@@ -10,7 +10,7 @@ module forlab_linalg
     private
 
     public :: is_square, is_symmetric
-    public :: zeros, ones, linspace, logspace, seq
+    public :: zeros, ones, ex, linspace, logspace, seq
     public :: eye
     public :: horzcat, vertcat
     public :: diag, det, lu, matpow, qr, svd, trace, tril, triu, chol, norm, &
@@ -90,6 +90,25 @@ module forlab_linalg
         end subroutine eig_${k1}$
         #:endfor
     end interface eig
+
+    !> Make a `ex` vector/matrix. 
+    interface ex
+        #:set RCI_KINDS_TYPES = REAL_KINDS_TYPES + INT_KINDS_TYPES + CMPLX_KINDS_TYPES 
+        #:for k1, t1 in RCI_KINDS_TYPES
+        !> Make a ex vector of `${t1}$` type.
+        pure module function ex_1_${t1[0]}$_${k1}$(value, dim) result(result)
+            ${t1}$, intent(in) :: value
+            integer, intent(in) :: dim
+            ${t1}$ :: result(dim)
+        end function ex_1_${t1[0]}$_${k1}$
+        !> Make a ex matrix of `${t1}$` type.
+        pure module function ex_2_${t1[0]}$_${k1}$(value, dim1, dim2) result(result)
+            ${t1}$, intent(in) :: value
+            integer, intent(in) :: dim1, dim2
+            ${t1}$ :: result(dim1, dim2)
+        end function ex_2_${t1[0]}$_${k1}$
+        #:endfor
+    end interface ex
 
     interface eye
         #:for k1, t1 in REAL_KINDS_TYPES
@@ -258,14 +277,13 @@ module forlab_linalg
     end interface qr
 
     interface seq
-        !! seq returns evenly spaced vector.
+        !> seq returns evenly spaced vector.
         #:set RI_KINDS_TYPES = REAL_KINDS_TYPES + INT_KINDS_TYPES 
         #:for k1, t1 in RI_KINDS_TYPES
-        module subroutine seq_${k1}$ (X, from, to, by)
-            ${t1}$, dimension(:), allocatable, intent(out) :: X
-            ${t1}$, intent(in) :: from, to
-            ${t1}$, optional, intent(in) :: by
-        end subroutine seq_${k1}$
+        pure module function seq_${t1[0]}$_${k1}$ (start, end, by) result(result)
+            ${t1}$, intent(in) :: start, end, by
+            ${t1}$ :: result(max(int(abs(start - end)/by + 1), 0))
+        end function seq_${t1[0]}$_${k1}$
         #:endfor
     end interface seq
 

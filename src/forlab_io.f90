@@ -28,11 +28,11 @@ module forlab_io
         procedure :: close
     end type file
 
+    !> version: experimental
+    !>
+    !> Quickly display strings, scalars and low-dimensional arrays to the default output_unit
+    !> ([Specification](../page/specs/stdlib_io.html))
     interface disp
-        !! version: experimental
-        !!
-        !! Quickly display strings, scalars and low-dimensional arrays to the default output_unit
-        !! ([Specification](../page/specs/stdlib_io.html#description))
         module subroutine disp_0_rsp(value, string)
             real(sp), intent(in) :: value
             character(len=*), intent(in), optional :: string

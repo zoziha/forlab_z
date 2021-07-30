@@ -13,9 +13,8 @@ program test_linalg_diff
     call disp(x, "Linspace(x) : ")
     call disp(diff(x), "Test_linalg_diff : ")
 
-    call seq(i, 0, 9, 1)
     call disp("Test_linalg_diff_integer : ")
     call disp(i, "Seq(i) : ")
-    call disp(diff(i), "Test_linalg_diff : ")
+    call disp(diff(seq(1.0, 9.0, 1.0)), "Test_linalg_diff : ")
     
 end program test_linalg_diff

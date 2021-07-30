@@ -4,138 +4,102 @@ submodule(forlab_linalg) forlab_linalg_seq
 
 contains
 
-    module procedure seq_sp
-        real(sp) :: by_
-        integer :: i, n
+    !> Make a seq of `real(sp)` type
+    module procedure seq_r_sp
 
-        by_ = optval(by, 1.0_sp)
+        integer :: i
 
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
-        end if
-
-        n = int(abs(to-from)/by_)+1
-        allocate(X(n))
-        if (from <= to) then
-            X = from + by_*real([(i-1,i=1,n)],sp) 
+        if (start <= end) then
+            result = start + by*real([(i-1,i=1,size(result))],sp) 
         else
-            X = from - by_*real([(i-1,i=1,n)],sp) 
-        end if
-        return
-    end procedure seq_sp
-    module procedure seq_dp
-        real(dp) :: by_
-        integer :: i, n
-
-        by_ = optval(by, 1.0_dp)
-
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
+            result = start - by*real([(i-1,i=1,size(result))],sp) 
         end if
 
-        n = int(abs(to-from)/by_)+1
-        allocate(X(n))
-        if (from <= to) then
-            X = from + by_*real([(i-1,i=1,n)],dp) 
+    end procedure seq_r_sp
+    !> Make a seq of `real(dp)` type
+    module procedure seq_r_dp
+
+        integer :: i
+
+        if (start <= end) then
+            result = start + by*real([(i-1,i=1,size(result))],dp) 
         else
-            X = from - by_*real([(i-1,i=1,n)],dp) 
-        end if
-        return
-    end procedure seq_dp
-    module procedure seq_qp
-        real(qp) :: by_
-        integer :: i, n
-
-        by_ = optval(by, 1.0_qp)
-
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
+            result = start - by*real([(i-1,i=1,size(result))],dp) 
         end if
 
-        n = int(abs(to-from)/by_)+1
-        allocate(X(n))
-        if (from <= to) then
-            X = from + by_*real([(i-1,i=1,n)],qp) 
+    end procedure seq_r_dp
+    !> Make a seq of `real(qp)` type
+    module procedure seq_r_qp
+
+        integer :: i
+
+        if (start <= end) then
+            result = start + by*real([(i-1,i=1,size(result))],qp) 
         else
-            X = from - by_*real([(i-1,i=1,n)],qp) 
-        end if
-        return
-    end procedure seq_qp
-    module procedure seq_int8
-        integer(int8) :: by_
-        integer :: i, n
-
-        by_ = optval(by, 1_int8)
-
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
+            result = start - by*real([(i-1,i=1,size(result))],qp) 
         end if
 
-        n = (to-from)/by_+1
-        allocate(X(n))
-        if (from <= to) then
-            X = [(i, i=from, to, by_)]
+    end procedure seq_r_qp
+
+    !> Make a seq of `integer(int8)` type
+    pure module function seq_i_int8(start, end, by) result(result)
+        implicit none
+        integer(int8), intent(in) :: start, end, by
+        integer(int8) :: result(max(int(abs(start - end)/by + 1), 0))
+
+        integer :: i
+
+        if (start <= end) then
+            result = [(i, i=start, end, by)]
         else
-            X = [(i, i=from, to, -by_)]
-        end if
-        return
-    end procedure seq_int8
-    module procedure seq_int16
-        integer(int16) :: by_
-        integer :: i, n
-
-        by_ = optval(by, 1_int16)
-
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
+            result = [(i, i=start, end, -by)] 
         end if
 
-        n = (to-from)/by_+1
-        allocate(X(n))
-        if (from <= to) then
-            X = [(i, i=from, to, by_)]
+    end function seq_i_int8
+    !> Make a seq of `integer(int16)` type
+    pure module function seq_i_int16(start, end, by) result(result)
+        implicit none
+        integer(int16), intent(in) :: start, end, by
+        integer(int16) :: result(max(int(abs(start - end)/by + 1), 0))
+
+        integer :: i
+
+        if (start <= end) then
+            result = [(i, i=start, end, by)]
         else
-            X = [(i, i=from, to, -by_)]
-        end if
-        return
-    end procedure seq_int16
-    module procedure seq_int32
-        integer(int32) :: by_
-        integer :: i, n
-
-        by_ = optval(by, 1_int32)
-
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
+            result = [(i, i=start, end, -by)] 
         end if
 
-        n = (to-from)/by_+1
-        allocate(X(n))
-        if (from <= to) then
-            X = [(i, i=from, to, by_)]
+    end function seq_i_int16
+    !> Make a seq of `integer(int32)` type
+    pure module function seq_i_int32(start, end, by) result(result)
+        implicit none
+        integer(int32), intent(in) :: start, end, by
+        integer(int32) :: result(max(int(abs(start - end)/by + 1), 0))
+
+        integer :: i
+
+        if (start <= end) then
+            result = [(i, i=start, end, by)]
         else
-            X = [(i, i=from, to, -by_)]
-        end if
-        return
-    end procedure seq_int32
-    module procedure seq_int64
-        integer(int64) :: by_
-        integer :: i, n
-
-        by_ = optval(by, 1_int64)
-
-        if (by <= 0) then
-            call error_stop('Error: In seq, `by` should be greater than 0.')
+            result = [(i, i=start, end, -by)] 
         end if
 
-        n = (to-from)/by_+1
-        allocate(X(n))
-        if (from <= to) then
-            X = [(i, i=from, to, by_)]
+    end function seq_i_int32
+    !> Make a seq of `integer(int64)` type
+    pure module function seq_i_int64(start, end, by) result(result)
+        implicit none
+        integer(int64), intent(in) :: start, end, by
+        integer(int64) :: result(max(int(abs(start - end)/by + 1), 0))
+
+        integer :: i
+
+        if (start <= end) then
+            result = [(i, i=start, end, by)]
         else
-            X = [(i, i=from, to, -by_)]
+            result = [(i, i=start, end, -by)] 
         end if
-        return
-    end procedure seq_int64
+
+    end function seq_i_int64
 
 end submodule forlab_linalg_seq
