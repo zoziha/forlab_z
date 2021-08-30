@@ -1,0 +1,48 @@
+  
+name: CI_windows
+
+on: [push, pull_request]
+
+jobs:
+  gcc-build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - gcc_v: 11
+            tag: 11.2.0-12.0.1-9.0.0-r1
+            zip: winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64-9.0.0-r1.zip
+            
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download GCC/MinGW
+      uses: i3h/download-release-asset@v1
+      with:
+        owner: brechtsanders
+        repo: winlibs_mingw
+        tag: ${{ matrix.tag }}
+        file: ${{ matrix.zip }}
+
+    - name: Setup GCC/MinGW
+      run: |
+        unzip ${{ matrix.zip }}
+        echo "$PWD/mingw64/bin" >> $GITHUB_PATH
+
+    - name: Install fpm
+      uses: fortran-lang/setup-fpm@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build forlab
+      run: |
+        gfortran --version
+        fpm build
+    - name: Run tests
+      run: |
+        gfortran --version
+        fpm test
